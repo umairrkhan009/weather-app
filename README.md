@@ -5,7 +5,6 @@
 <p id="description">A simple weather application that allows users to search for weather information by location. The app fetches data from a weather API and displays current weather conditions.</p>
 
   
-  
 <h2>🧐 Features</h2>
 
 Here're some of the project's best features:
@@ -54,7 +53,7 @@ Technologies used in the project:
 
 <h2>🛡️ License:</h2>
 
-This project is licensed under the MIT License. See the (License.md) for details
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
 <h2>Contact</h2>
 Feel free to contact me at umairrkhhan009@gmail.com if you have any suggestions/feedback.
