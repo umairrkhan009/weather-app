@@ -40,7 +40,17 @@ npm start
 ```
 
 <h2>🍰 Contribution Guidelines:</h2>
+Feel free to contribute to this project.
 
+If you want to contribute to the project, please follow these steps:
+
+Fork the repository.
+
+1. Create a new branch (git checkout -b feature-branch).
+2. Make your changes.
+3. Commit your changes (git commit -am 'Add new feature').
+4. Push to the branch (git push origin feature-branch).
+5. Create a pull request.
   
   
 <h2>💻 Built with</h2>
