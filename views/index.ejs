@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather API</title>
+    <link rel="stylesheet" href="/styles/style.css">
+    
+</head>
+<body>
+
+
+
+
+
+    <div class="container">
+
+            <div class="current">
+                <div class="search-after">
+                    <form action="/weather" method="GET"></form>
+                        <input type="text" name="location" placeholder="Search" required>
+                        <button type="submit">
+                            <img src="/images/search.png" alt="Search Icon" height="27">
+                        </button>
+                    </form>
+                </div>
+
+                <div class="temp-details">
+                    <div class="temp">
+                        <h1>
+                            <%= location %>
+                        </h1>
+                        <h1>
+                            <%= currTemp %> &deg;C
+                        </h1>
+                    </div>
+                    <div class="icon">
+                        <% if(isDay==1){ %>
+                            <% if(currWeatherCode==0){ %>
+                                <img src="/images/clear-day.svg" alt="clear-day" height="150">
+                                <% } else if(currWeatherCode==1 || currWeatherCode == 2){ %>
+                                    <img src="/images/cloudy-1-day.svg" alt="cloudy-1-day" height="150">
+                            <% } else if(currWeatherCode==3){%>
+                                <img src="/images/cloudy-2-day.svg" alt="cloudy-2-day" height="150">
+                                <% } else if(currWeatherCode==45 || currWeatherCode==48){%>
+                                    <img src="/images/fog-day.svg" alt="fog-day" height="150">
+                                    <% } else if(currWeatherCode==51 || currWeatherCode==53 || currWeatherCode==61 || currWeatherCode==63){%>
+                                        <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="150">
+                                        <% } else if(currWeatherCode==55){ %>
+                                            <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="150">
+                                    <% } else if(currWeatherCode==65){ %>
+                                        <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="150">
+                                <% } else if(currWeatherCode>=71 && currWeatherCode<78){ %>
+                                    <img src="/images/snowy-2-day.svg" alt="snowy-2-day" height="150">
+                            <% } else if(currWeatherCode>=80 && currWeatherCode<=82){ %>
+                                <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="150">
+                        <% } %>
+                        <% } else{%>
+                            <% if(currWeatherCode==0){ %>
+                                <img src="/images/clear-night.svg" alt="clear-night" height="150">
+                                <% } else if(currWeatherCode==1 || currWeatherCode == 2){ %>
+                                    <img src="/images/cloudy-1-night.svg" alt="cloudy-1-night" height="150">
+                            <% } else if(currWeatherCode==3){%>
+                                <img src="/images/cloudy-2-night.svg" alt="cloudy-2-night" height="150">
+                                <% } else if(currWeatherCode==45 || currWeatherCode==48){%>
+                                    <img src="/images/fog-night.svg" alt="fog-night" height="150">
+                                    <% } else if(currWeatherCode==51 || currWeatherCode==53 || currWeatherCode==61 || currWeatherCode==63){%>
+                                        <img src="/images/rainy-1-night.svg" alt="rainy-1-night" height="150">
+                                        <% } else if(currWeatherCode==55){ %>
+                                            <img src="/images/rainy-1-night.svg" alt="rainy-1-night" height="150">
+                                    <% } else if(currWeatherCode==65){ %>
+                                        <img src="/images/rainy-3-night.svg" alt="rainy-3-night" height="150">
+                                <% } else if(currWeatherCode>=71 && currWeatherCode<78){ %>
+                                    <img src="/images/snowy-2-night.svg" alt="snowy-2-night" height="150">
+                            <% } else if(currWeatherCode>=80 && currWeatherCode<=82){ %>
+                                <img src="/images/rainy-3-night.svg" alt="rainy-3-night" height="150">
+                        <% } %>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="forecast">
+
+                <div class="six">
+                    <p>06:00 am</p>
+                    <div class="icon">
+                        <% if(hourly[0].hourlyDN==1){ %>
+                            <% if(hourly[0].hourlyWeatherCode==0){ %>
+                                <img src="/images/clear-day.svg" alt="clear-day" height="200">
+                                <% } else if(hourly[0].hourlyWeatherCode==1 || hourly[0].hourlyWeatherCode == 2){ %>
+                                    <img src="/images/cloudy-1-day.svg" alt="cloudy-1-day" height="200">
+                            <% } else if(hourly[0].hourlyWeatherCode==3){%>
+                                <img src="/images/cloudy-2-day.svg" alt="cloudy-2-day" height="200">
+                                <% } else if(hourly[0].hourlyWeatherCode==45 || hourly[0].hourlyWeatherCode==48){%>
+                                    <img src="/images/fog-day.svg" alt="fog-day" height="200">
+                                    <% } else if(hourly[0].hourlyWeatherCode==51 || hourly[0].hourlyWeatherCode==53 || hourly[0].hourlyWeatherCode==61 || hourly[0].hourlyWeatherCode==63){%>
+                                        <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="200">
+                                        <% } else if(hourly[0].hourlyWeatherCode==55){ %>
+                                            <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="200">
+                                    <% } else if(hourly[0].hourlyWeatherCode==65){ %>
+                                        <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="200">
+                                <% } else if(hourly[0].hourlyWeatherCode>=71 && hourly[0].hourlyWeatherCode<78){ %>
+                                    <img src="/images/snowy-2-day.svg" alt="snowy-2-day" height="200">
+                            <% } else if(hourly[0].hourlyWeatherCode>=80 && hourly[0].hourlyWeatherCode<=82){ %>
+                                <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="200">
+                        <% } %>
+                        <% } else{%>
+                            <% if(hourly[0].hourlyWeatherCode==0){ %>
+                                <img src="/images/clear-night.svg" alt="clear-night" height="200">
+                                <% } else if(hourly[0].hourlyWeatherCode==1 || hourly[0].hourlyWeatherCode == 2){ %>
+                                    <img src="/images/cloudy-1-night.svg" alt="cloudy-1-night" height="200">
+                            <% } else if(hourly[0].hourlyWeatherCode==3){%>
+                                <img src="/images/cloudy-2-night.svg" alt="cloudy-2-night" height="200">
+                                <% } else if(hourly[0].hourlyWeatherCode==45 || hourly[0].hourlyWeatherCode==48){%>
+                                    <img src="/images/fog-night.svg" alt="fog-night" height="200">
+                                    <% } else if(hourly[0].hourlyWeatherCode==51 || hourly[0].hourlyWeatherCode==53 || hourly[0].hourlyWeatherCode==61 || hourly[0].hourlyWeatherCode==63){%>
+                                        <img src="/images/rainy-1-night.svg" alt="rainy-1-night" height="200">
+                                        <% } else if(hourly[0].hourlyWeatherCode==55){ %>
+                                            <img src="/images/rainy-1-night.svg" alt="rainy-1-night" height="200">
+                                    <% } else if(hourly[0].hourlyWeatherCode==65){ %>
+                                        <img src="/images/rainy-3-night.svg" alt="rainy-3-night" height="200">
+                                <% } else if(hourly[0].hourlyWeatherCode>=71 && hourly[0].hourlyWeatherCode<78){ %>
+                                    <img src="/images/snowy-2-night.svg" alt="snowy-2-night" height="200">
+                            <% } else if(hourly[0].hourlyWeatherCode>=80 && hourly[0].hourlyWeatherCode<=82){ %>
+                                <img src="/images/rainy-3-night.svg" alt="rainy-3-night" height="200">
+                            <% } %>
+                            <% } %>
+                        </div>
+                        <p>
+                            <%= hourly[0].hourlyTemp %> &deg;C
+                        </p>
+                </div>
+
+
+                <div class="nine">
+                    <p>09:00 am</p>
+                    <div class="icon">
+                        <% if(hourly[1].hourlyDN==1){ %>
+                            <% if(hourly[1].hourlyWeatherCode==0){ %>
+                                <img src="/images/clear-day.svg" alt="clear-day" height="200">
+                                <% } else if(hourly[1].hourlyWeatherCode==1 || hourly[1].hourlyWeatherCode == 2){ %>
+                                    <img src="/images/cloudy-1-day.svg" alt="cloudy-1-day" height="200">
+                            <% } else if(hourly[1].hourlyWeatherCode==3){%>
+                                <img src="/images/cloudy-2-day.svg" alt="cloudy-2-day" height="200">
+                                <% } else if(hourly[1].hourlyWeatherCode==45 || hourly[1].hourlyWeatherCode==48){%>
+                                    <img src="/images/fog-day.svg" alt="fog-day" height="200">
+                                    <% } else if(hourly[1].hourlyWeatherCode==51 || hourly[1].hourlyWeatherCode==53 || hourly[1].hourlyWeatherCode==61 || hourly[1].hourlyWeatherCode==63){%>
+                                        <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="200">
+                                        <% } else if(hourly[1].hourlyWeatherCode==55){ %>
+                                            <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="200">
+                                    <% } else if(hourly[1].hourlyWeatherCode==65){ %>
+                                        <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="200">
+                                <% } else if(hourly[1].hourlyWeatherCode>=71 && hourly[1].hourlyWeatherCode<78){ %>
+                                    <img src="/images/snowy-2-day.svg" alt="snowy-2-day" height="200">
+                            <% } else if(hourly[1].hourlyWeatherCode>=80 && hourly[1].hourlyWeatherCode<=82){ %>
+                                <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="200">
+                        <% } %>
+                        <% } else{%>
+                            <% if(hourly[1].hourlyWeatherCode==0){ %>
+                                <img src="/images/clear-night.svg" alt="clear-night" height="200">
+                                <% } else if(hourly[1].hourlyWeatherCode==1 || hourly[1].hourlyWeatherCode == 2){ %>
+                                    <img src="/images/cloudy-1-night.svg" alt="cloudy-1-night" height="200">
+                            <% } else if(hourly[1].hourlyWeatherCode==3){%>
+                                <img src="/images/cloudy-2-night.svg" alt="cloudy-2-night" height="200">
+                                <% } else if(hourly[1].hourlyWeatherCode==45 || hourly[1].hourlyWeatherCode==48){%>
+                                    <img src="/images/fog-night.svg" alt="fog-night" height="200">
+                                    <% } else if(hourly[1].hourlyWeatherCode==51 || hourly[1].hourlyWeatherCode==53 || hourly[1].hourlyWeatherCode==61 || hourly[1].hourlyWeatherCode==63){%>
+                                        <img src="/images/rainy-1-night.svg" alt="rainy-1-night" height="200">
+                                        <% } else if(hourly[1].hourlyWeatherCode==55){ %>
+                                            <img src="/images/rainy-1-night.svg" alt="rainy-1-night" height="200">
+                                    <% } else if(hourly[1].hourlyWeatherCode==65){ %>
+                                        <img src="/images/rainy-3-night.svg" alt="rainy-3-night" height="200">
+                                <% } else if(hourly[1].hourlyWeatherCode>=71 && hourly[1].hourlyWeatherCode<78){ %>
+                                    <img src="/images/snowy-2-night.svg" alt="snowy-2-night" height="200">
+                            <% } else if(hourly[1].hourlyWeatherCode>=80 && hourly[1].hourlyWeatherCode<=82){ %>
+                                <img src="/images/rainy-3-night.svg" alt="rainy-3-night" height="200">
+                            <% } %>
+                            <% } %>
+                        </div>
+                        <p>
+                            <%= hourly[1].hourlyTemp %> &deg;C
+                        </p>
+                </div>
+
+                <div class="twelve">
+                    <p>12:00 pm</p>
+                    <div class="icon">
+                        <% if(hourly[2].hourlyDN==1){ %>
+                            <% if(hourly[2].hourlyWeatherCode==0){ %>
+                                <img src="/images/clear-day.svg" alt="clear-day" height="200">
+                                <% } else if(hourly[2].hourlyWeatherCode==1 || hourly[2].hourlyWeatherCode == 2){ %>
+                                    <img src="/images/cloudy-1-day.svg" alt="cloudy-1-day" height="200">
+                            <% } else if(hourly[2].hourlyWeatherCode==3){%>
+                                <img src="/images/cloudy-2-day.svg" alt="cloudy-2-day" height="200">
+                                <% } else if(hourly[2].hourlyWeatherCode==45 || hourly[2].hourlyWeatherCode==48){%>
+                                    <img src="/images/fog-day.svg" alt="fog-day" height="200">
+                                    <% } else if(hourly[2].hourlyWeatherCode==51 || hourly[2].hourlyWeatherCode==53 || hourly[2].hourlyWeatherCode==61 || hourly[2].hourlyWeatherCode==63){%>
+                                        <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="200">
+                                        <% } else if(hourly[2].hourlyWeatherCode==55){ %>
+                                            <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="200">
+                                    <% } else if(hourly[2].hourlyWeatherCode==65){ %>
+                                        <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="200">
+                                <% } else if(hourly[2].hourlyWeatherCode>=71 && hourly[2].hourlyWeatherCode<78){ %>
+                                    <img src="/images/snowy-2-day.svg" alt="snowy-2-day" height="200">
+                            <% } else if(hourly[2].hourlyWeatherCode>=80 && hourly[2].hourlyWeatherCode<=82){ %>
+                                <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="200">
+                        <% } %>
+                        <% } else{%>
+                            <% if(hourly[2].hourlyWeatherCode==0){ %>
+                                <img src="/images/clear-night.svg" alt="clear-night" height="200">
+                                <% } else if(hourly[2].hourlyWeatherCode==1 || hourly[2].hourlyWeatherCode == 2){ %>
+                                    <img src="/images/cloudy-1-night.svg" alt="cloudy-1-night" height="200">
+                            <% } else if(hourly[2].hourlyWeatherCode==3){%>
+                                <img src="/images/cloudy-2-night.svg" alt="cloudy-2-night" height="200">
+                                <% } else if(hourly[2].hourlyWeatherCode==45 || hourly[2].hourlyWeatherCode==48){%>
+                                    <img src="/images/fog-night.svg" alt="fog-night" height="200">
+                                    <% } else if(hourly[2].hourlyWeatherCode==51 || hourly[2].hourlyWeatherCode==53 || hourly[2].hourlyWeatherCode==61 || hourly[2].hourlyWeatherCode==63){%>
+                                        <img src="/images/rainy-1-night.svg" alt="rainy-1-night" height="200">
+                                        <% } else if(hourly[2].hourlyWeatherCode==55){ %>
+                                            <img src="/images/rainy-1-night.svg" alt="rainy-1-night" height="200">
+                                    <% } else if(hourly[2].hourlyWeatherCode==65){ %>
+                                        <img src="/images/rainy-3-night.svg" alt="rainy-3-night" height="200">
+                                <% } else if(hourly[2].hourlyWeatherCode>=71 && hourly[2].hourlyWeatherCode<78){ %>
+                                    <img src="/images/snowy-2-night.svg" alt="snowy-2-night" height="200">
+                            <% } else if(hourly[2].hourlyWeatherCode>=80 && hourly[2].hourlyWeatherCode<=82){ %>
+                                <img src="/images/rainy-3-night.svg" alt="rainy-3-night" height="200">
+                            <% } %>
+                            <% } %>
+                        </div>
+                        <p>
+                            <%= hourly[2].hourlyTemp %> &deg;C
+                        </p>
+                </div>
+
+                <div class="fifteen">
+                    <p>03:00 pm</p>
+                    <div class="icon">
+                        <% if(hourly[3].hourlyDN==1){ %>
+                            <% if(hourly[3].hourlyWeatherCode==0){ %>
+                                <img src="/images/clear-day.svg" alt="clear-day" height="200">
+                                <% } else if(hourly[3].hourlyWeatherCode==1 || hourly[3].hourlyWeatherCode == 2){ %>
+                                    <img src="/images/cloudy-1-day.svg" alt="cloudy-1-day" height="200">
+                            <% } else if(hourly[3].hourlyWeatherCode==3){%>
+                                <img src="/images/cloudy-2-day.svg" alt="cloudy-2-day" height="200">
+                                <% } else if(hourly[3].hourlyWeatherCode==45 || hourly[3].hourlyWeatherCode==48){%>
+                                    <img src="/images/fog-day.svg" alt="fog-day" height="200">
+                                    <% } else if(hourly[3].hourlyWeatherCode==51 || hourly[3].hourlyWeatherCode==53 || hourly[3].hourlyWeatherCode==61 || hourly[3].hourlyWeatherCode==63){%>
+                                        <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="200">
+                                        <% } else if(hourly[3].hourlyWeatherCode==55){ %>
+                                            <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="200">
+                                    <% } else if(hourly[3].hourlyWeatherCode==65){ %>
+                                        <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="200">
+                                <% } else if(hourly[3].hourlyWeatherCode>=71 && hourly[3].hourlyWeatherCode<78){ %>
+                                    <img src="/images/snowy-2-day.svg" alt="snowy-2-day" height="200">
+                            <% } else if(hourly[3].hourlyWeatherCode>=80 && hourly[3].hourlyWeatherCode<=82){ %>
+                                <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="200">
+                        <% } %>
+                        <% } else{%>
+                            <% if(hourly[3].hourlyWeatherCode==0){ %>
+                                <img src="/images/clear-night.svg" alt="clear-night" height="200">
+                                <% } else if(hourly[3].hourlyWeatherCode==1 || hourly[3].hourlyWeatherCode == 2){ %>
+                                    <img src="/images/cloudy-1-night.svg" alt="cloudy-1-night" height="200">
+                            <% } else if(hourly[3].hourlyWeatherCode==3){%>
+                                <img src="/images/cloudy-2-night.svg" alt="cloudy-2-night" height="200">
+                                <% } else if(hourly[3].hourlyWeatherCode==45 || hourly[3].hourlyWeatherCode==48){%>
+                                    <img src="/images/fog-night.svg" alt="fog-night" height="200">
+                                    <% } else if(hourly[3].hourlyWeatherCode==51 || hourly[3].hourlyWeatherCode==53 || hourly[3].hourlyWeatherCode==61 || hourly[3].hourlyWeatherCode==63){%>
+                                        <img src="/images/rainy-1-night.svg" alt="rainy-1-night" height="200">
+                                        <% } else if(hourly[3].hourlyWeatherCode==55){ %>
+                                            <img src="/images/rainy-1-night.svg" alt="rainy-1-night" height="200">
+                                    <% } else if(hourly[3].hourlyWeatherCode==65){ %>
+                                        <img src="/images/rainy-3-night.svg" alt="rainy-3-night" height="200">
+                                <% } else if(hourly[3].hourlyWeatherCode>=71 && hourly[3].hourlyWeatherCode<78){ %>
+                                    <img src="/images/snowy-2-night.svg" alt="snowy-2-night" height="200">
+                            <% } else if(hourly[3].hourlyWeatherCode>=80 && hourly[3].hourlyWeatherCode<=82){ %>
+                                <img src="/images/rainy-3-night.svg" alt="rainy-3-night" height="200">
+                            <% } %>
+                            <% } %>
+                        </div>
+                        <p>
+                            <%= hourly[3].hourlyTemp %> &deg;C
+                        </p>
+                </div>
+
+                <div class="eighteen">
+                    <p>06:00 pm</p>
+                    <div class="icon">
+                        <% if(hourly[4].hourlyDN==1){ %>
+                            <% if(hourly[4].hourlyWeatherCode==0){ %>
+                                <img src="/images/clear-day.svg" alt="clear-day" height="200">
+                                <% } else if(hourly[4].hourlyWeatherCode==1 || hourly[4].hourlyWeatherCode == 2){ %>
+                                    <img src="/images/cloudy-1-day.svg" alt="cloudy-1-day" height="200">
+                            <% } else if(hourly[4].hourlyWeatherCode==3){%>
+                                <img src="/images/cloudy-2-day.svg" alt="cloudy-2-day" height="200">
+                                <% } else if(hourly[4].hourlyWeatherCode==45 || hourly[4].hourlyWeatherCode==48){%>
+                                    <img src="/images/fog-day.svg" alt="fog-day" height="200">
+                                    <% } else if(hourly[4].hourlyWeatherCode==51 || hourly[4].hourlyWeatherCode==53 || hourly[4].hourlyWeatherCode==61 || hourly[4].hourlyWeatherCode==63){%>
+                                        <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="200">
+                                        <% } else if(hourly[4].hourlyWeatherCode==55){ %>
+                                            <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="200">
+                                    <% } else if(hourly[4].hourlyWeatherCode==65){ %>
+                                        <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="200">
+                                <% } else if(hourly[4].hourlyWeatherCode>=71 && hourly[4].hourlyWeatherCode<78){ %>
+                                    <img src="/images/snowy-2-day.svg" alt="snowy-2-day" height="200">
+                            <% } else if(hourly[4].hourlyWeatherCode>=80 && hourly[4].hourlyWeatherCode<=82){ %>
+                                <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="200">
+                        <% } %>
+                        <% } else{%>
+                            <% if(hourly[4].hourlyWeatherCode==0){ %>
+                                <img src="/images/clear-night.svg" alt="clear-night" height="200">
+                                <% } else if(hourly[4].hourlyWeatherCode==1 || hourly[4].hourlyWeatherCode == 2){ %>
+                                    <img src="/images/cloudy-1-night.svg" alt="cloudy-1-night" height="200">
+                            <% } else if(hourly[4].hourlyWeatherCode==3){%>
+                                <img src="/images/cloudy-2-night.svg" alt="cloudy-2-night" height="200">
+                                <% } else if(hourly[4].hourlyWeatherCode==45 || hourly[4].hourlyWeatherCode==48){%>
+                                    <img src="/images/fog-night.svg" alt="fog-night" height="200">
+                                    <% } else if(hourly[4].hourlyWeatherCode==51 || hourly[4].hourlyWeatherCode==53 || hourly[4].hourlyWeatherCode==61 || hourly[4].hourlyWeatherCode==63){%>
+                                        <img src="/images/rainy-1-night.svg" alt="rainy-1-night" height="200">
+                                        <% } else if(hourly[4].hourlyWeatherCode==55){ %>
+                                            <img src="/images/rainy-1-night.svg" alt="rainy-1-night" height="200">
+                                    <% } else if(hourly[4].hourlyWeatherCode==65){ %>
+                                        <img src="/images/rainy-3-night.svg" alt="rainy-3-night" height="200">
+                                <% } else if(hourly[4].hourlyWeatherCode>=71 && hourly[4].hourlyWeatherCode<78){ %>
+                                    <img src="/images/snowy-2-night.svg" alt="snowy-2-night" height="200">
+                            <% } else if(hourly[4].hourlyWeatherCode>=80 && hourly[4].hourlyWeatherCode<=82){ %>
+                                <img src="/images/rainy-3-night.svg" alt="rainy-3-night" height="200">
+                            <% } %>
+                            <% } %>
+                        </div>
+                        <p>
+                            <%= hourly[4].hourlyTemp %> &deg;C
+                        </p>
+                </div>
+
+                <div class="twenty-one">
+                    <p>06:00 pm</p>
+                    <div class="icon">
+                        <% if(hourly[5].hourlyDN==1){ %>
+                            <% if(hourly[5].hourlyWeatherCode==0){ %>
+                                <img src="/images/clear-day.svg" alt="clear-day" height="200">
+                                <% } else if(hourly[5].hourlyWeatherCode==1 || hourly[5].hourlyWeatherCode == 2){ %>
+                                    <img src="/images/cloudy-1-day.svg" alt="cloudy-1-day" height="200">
+                            <% } else if(hourly[5].hourlyWeatherCode==3){%>
+                                <img src="/images/cloudy-2-day.svg" alt="cloudy-2-day" height="200">
+                                <% } else if(hourly[5].hourlyWeatherCode==45 || hourly[5].hourlyWeatherCode==48){%>
+                                    <img src="/images/fog-day.svg" alt="fog-day" height="200">
+                                    <% } else if(hourly[5].hourlyWeatherCode==51 || hourly[5].hourlyWeatherCode==53 || hourly[5].hourlyWeatherCode==61 || hourly[5].hourlyWeatherCode==63){%>
+                                        <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="200">
+                                        <% } else if(hourly[5].hourlyWeatherCode==55){ %>
+                                            <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="200">
+                                    <% } else if(hourly[5].hourlyWeatherCode==65){ %>
+                                        <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="200">
+                                <% } else if(hourly[5].hourlyWeatherCode>=71 && hourly[5].hourlyWeatherCode<78){ %>
+                                    <img src="/images/snowy-2-day.svg" alt="snowy-2-day" height="200">
+                            <% } else if(hourly[5].hourlyWeatherCode>=80 && hourly[5].hourlyWeatherCode<=82){ %>
+                                <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="200">
+                        <% } %>
+                        <% } else{%>
+                            <% if(hourly[5].hourlyWeatherCode==0){ %>
+                                <img src="/images/clear-night.svg" alt="clear-night" height="200">
+                                <% } else if(hourly[5].hourlyWeatherCode==1 || hourly[5].hourlyWeatherCode == 2){ %>
+                                    <img src="/images/cloudy-1-night.svg" alt="cloudy-1-night" height="200">
+                            <% } else if(hourly[5].hourlyWeatherCode==3){%>
+                                <img src="/images/cloudy-2-night.svg" alt="cloudy-2-night" height="200">
+                                <% } else if(hourly[5].hourlyWeatherCode==45 || hourly[5].hourlyWeatherCode==48){%>
+                                    <img src="/images/fog-night.svg" alt="fog-night" height="200">
+                                    <% } else if(hourly[5].hourlyWeatherCode==51 || hourly[5].hourlyWeatherCode==53 || hourly[5].hourlyWeatherCode==61 || hourly[5].hourlyWeatherCode==63){%>
+                                        <img src="/images/rainy-1-night.svg" alt="rainy-1-night" height="200">
+                                        <% } else if(hourly[5].hourlyWeatherCode==55){ %>
+                                            <img src="/images/rainy-1-night.svg" alt="rainy-1-night" height="200">
+                                    <% } else if(hourly[5].hourlyWeatherCode==65){ %>
+                                        <img src="/images/rainy-3-night.svg" alt="rainy-3-night" height="200">
+                                <% } else if(hourly[5].hourlyWeatherCode>=71 && hourly[5].hourlyWeatherCode<78){ %>
+                                    <img src="/images/snowy-2-night.svg" alt="snowy-2-night" height="200">
+                            <% } else if(hourly[5].hourlyWeatherCode>=80 && hourly[5].hourlyWeatherCode<=82){ %>
+                                <img src="/images/rainy-3-night.svg" alt="rainy-3-night" height="200">
+                            <% } %>
+                            <% } %>
+                        </div>
+                        <p>
+                            <%= hourly[5].hourlyTemp %> &deg;C
+                        </p>
+                </div>
+
+
+                
+
+            </div>
+
+
+            <div class="details">
+
+                <div class="sunrise">
+                    <div class="details-icon">
+                        <img src="/images/sunrise (1).png" alt="Sunrise" height="60">
+                    </div>
+                    
+                    <div class="content">
+                        <h3>Sunrise</h3>
+                        <p>
+                            <%= todaySunrise.slice(11) %>
+                        </p>
+                    </div>
+                
+                </div>
+                <div class="sunset">
+                    <div class="details-icon">
+                        <img src="/images/sunset (1).png" alt="Sunset" height="60">
+                    </div>
+                    
+                    <div class="content">
+                        <h3>Sunset</h3>
+                        <p>
+                            <%= todaySunset.slice(11) %>
+                        </p>
+                    </div>
+                
+                </div>
+                <div class="humidity">
+                    <div class="details-icon">
+                        <img src="/images/humidity (1).png" alt="Humidity" height="50">
+                    </div>
+                    
+                    <div class="content">
+                        <h3>Humidity</h3>
+                        <p>
+                            <%= currHumidity %> %
+                        </p>
+                    </div>
+                
+                </div>
+                <div class="rain">
+                    <div class="details-icon">
+                        <img src="/images/heavy-rain.png" alt="Rain" height="50">
+                    </div>
+                    
+                    <div class="content">
+                        <h3>Rain</h3>
+                        <p>
+                            <%= rain %> mm
+                        </p>
+                    </div>
+                
+                </div>
+
+            </div>
+
+            <div class="week-forecast">
+
+                <div class="search">
+                    <form action="/weather" method="GET">
+                        <input type="text" name="location" placeholder="Search" required>
+                        <button type="submit">
+                            <img src="/images/search.png" alt="Search Icon" height="27">
+                        </button>
+                    </form>
+                </div>
+
+
+                    <div class="content">
+                        <p class="date" data-date="<%= daily[0].date %>">
+                            <%= daily[0].date %>
+                        </p>
+                        <div class="icon">
+                            
+                            <% if(isDay==1){ %>
+                                <% if(currWeatherCode==0){ %>
+                                    <img src="/images/clear-day.svg" alt="clear-day" height="65">
+                                    <% } else if(currWeatherCode==1 || currWeatherCode == 2){ %>
+                                        <img src="/images/cloudy-1-day.svg" alt="cloudy-1-day" height="65">
+                                <% } else if(currWeatherCode==3){%>
+                                    <img src="/images/cloudy-2-day.svg" alt="cloudy-2-day" height="65">
+                                    <% } else if(currWeatherCode==45 || currWeatherCode==48){%>
+                                        <img src="/images/fog-day.svg" alt="fog-day" height="65">
+                                        <% } else if(currWeatherCode==51 || currWeatherCode==53 || currWeatherCode==61 || currWeatherCode==63){%>
+                                            <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="65">
+                                            <% } else if(currWeatherCode==55){ %>
+                                                <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="65">
+                                        <% } else if(currWeatherCode==65){ %>
+                                            <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="65">
+                                    <% } else if(currWeatherCode>=71 && currWeatherCode<78){ %>
+                                        <img src="/images/snowy-2-day.svg" alt="snowy-2-day" height="65">
+                                <% } else if(currWeatherCode>=80 && currWeatherCode<=82){ %>
+                                    <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="65">
+                            <% } %>
+                            <% } else{%>
+                                <% if(currWeatherCode==0){ %>
+                                    <img src="/images/clear-night.svg" alt="clear-night" height="65">
+                                    <% } else if(currWeatherCode==1 || currWeatherCode == 2){ %>
+                                        <img src="/images/cloudy-1-night.svg" alt="cloudy-1-night" height="65">
+                                <% } else if(currWeatherCode==3){%>
+                                    <img src="/images/cloudy-2-night.svg" alt="cloudy-2-night" height="65">
+                                    <% } else if(currWeatherCode==45 || currWeatherCode==48){%>
+                                        <img src="/images/fog-night.svg" alt="fog-night" height="65">
+                                        <% } else if(currWeatherCode==51 || currWeatherCode==53 || currWeatherCode==61 || currWeatherCode==63){%>
+                                            <img src="/images/rainy-1-night.svg" alt="rainy-1-night" height="65">
+                                            <% } else if(currWeatherCode==55){ %>
+                                                <img src="/images/rainy-1-night.svg" alt="rainy-1-night" height="65">
+                                        <% } else if(currWeatherCode==65){ %>
+                                            <img src="/images/rainy-3-night.svg" alt="rainy-3-night" height="65">
+                                    <% } else if(currWeatherCode>=71 && currWeatherCode<78){ %>
+                                        <img src="/images/snowy-2-night.svg" alt="snowy-2-night" height="65">
+                                <% } else if(currWeatherCode>=80 && currWeatherCode<=82){ %>
+                                    <img src="/images/rainy-3-night.svg" alt="rainy-3-night" height="65">
+                            <% } %>
+                            <% } %>
+                                
+                        </div>
+                        <p>
+                            <%= daily[0].minTemp %>  / <%= daily[0].maxTemp %>
+                        </p>
+                    </div>
+
+                    <div class="content">
+                        <p class="date" data-date="<%= daily[1].date %>">
+                            <%= daily[1].date %>
+                        </p>
+                        <div class="icon">
+                            
+                                <% if(daily[1].dailyWeatherCode==0){ %>
+                                    <img src="/images/clear-day.svg" alt="clear-day" height="65">
+                                    <% } else if(daily[1].dailyWeatherCode==1 || daily[1].dailyWeatherCode == 2){ %>
+                                        <img src="/images/cloudy-1-day.svg" alt="cloudy-1-day" height="65">
+                                <% } else if(daily[1].dailyWeatherCode==3){%>
+                                    <img src="/images/cloudy-2-day.svg" alt="cloudy-2-day" height="65">
+                                    <% } else if(daily[1].dailyWeatherCode==45 || daily[1].dailyWeatherCode==48){%>
+                                        <img src="/images/fog-day.svg" alt="fog-day" height="65">
+                                        <% } else if(daily[1].dailyWeatherCode==51 || daily[1].dailyWeatherCode==53 || daily[1].dailyWeatherCode==61 || daily[1].dailyWeatherCode==63){%>
+                                            <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="65">
+                                            <% } else if(daily[1].dailyWeatherCode==55){ %>
+                                                <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="65">
+                                        <% } else if(daily[1].dailyWeatherCode==65){ %>
+                                            <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="65">
+                                    <% } else if(daily[1].dailyWeatherCode>=71 && daily[1].dailyWeatherCode<78){ %>
+                                        <img src="/images/snowy-2-day.svg" alt="snowy-2-day" height="65">
+                                <% } else if(daily[1].dailyWeatherCode>=65 && daily[1].dailyWeatherCode<=82){ %>
+                                    <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="65">
+                            <% } %>
+                            
+                                
+                        </div>
+                        <p>
+                            <%= daily[1].minTemp %>  /  <%= daily[1].maxTemp %>
+                        </p>
+                    </div>
+
+
+                    <div class="content">
+                        <p class="date" data-date="<%= daily[2].date %>">
+                            <%= daily[2].date %>
+                        </p>
+                        <div class="icon">
+                            
+                                <% if(daily[2].dailyWeatherCode==0){ %>
+                                    <img src="/images/clear-day.svg" alt="clear-day" height="65">
+                                    <% } else if(daily[2].dailyWeatherCode==1 || daily[2].dailyWeatherCode == 2){ %>
+                                        <img src="/images/cloudy-1-day.svg" alt="cloudy-1-day" height="65">
+                                <% } else if(daily[2].dailyWeatherCode==3){%>
+                                    <img src="/images/cloudy-2-day.svg" alt="cloudy-2-day" height="65">
+                                    <% } else if(daily[2].dailyWeatherCode==45 || daily[2].dailyWeatherCode==48){%>
+                                        <img src="/images/fog-day.svg" alt="fog-day" height="65">
+                                        <% } else if(daily[2].dailyWeatherCode==51 || daily[2].dailyWeatherCode==53 || daily[2].dailyWeatherCode==61 || daily[2].dailyWeatherCode==63){%>
+                                            <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="65">
+                                            <% } else if(daily[2].dailyWeatherCode==55){ %>
+                                                <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="65">
+                                        <% } else if(daily[2].dailyWeatherCode==65){ %>
+                                            <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="65">
+                                    <% } else if(daily[2].dailyWeatherCode>=71 && daily[2].dailyWeatherCode<78){ %>
+                                        <img src="/images/snowy-2-day.svg" alt="snowy-2-day" height="65">
+                                <% } else if(daily[2].dailyWeatherCode>=65 && daily[2].dailyWeatherCode<=82){ %>
+                                    <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="65">
+                            <% } %>
+                            
+                                
+                        </div>
+                        <p>
+                            <%= daily[2].minTemp %> / <%= daily[2].maxTemp %>
+                        </p>
+                    </div>
+
+                    <div class="content">
+                        <p class="date" data-date="<%= daily[3].date %>">
+                            <%= daily[3].date %>
+                        </p>
+                        <div class="icon">
+                            
+                                <% if(daily[3].dailyWeatherCode==0){ %>
+                                    <img src="/images/clear-day.svg" alt="clear-day" height="65">
+                                    <% } else if(daily[3].dailyWeatherCode==1 || daily[3].dailyWeatherCode == 2){ %>
+                                        <img src="/images/cloudy-1-day.svg" alt="cloudy-1-day" height="65">
+                                <% } else if(daily[3].dailyWeatherCode==3){%>
+                                    <img src="/images/cloudy-2-day.svg" alt="cloudy-2-day" height="65">
+                                    <% } else if(daily[3].dailyWeatherCode==45 || daily[3].dailyWeatherCode==48){%>
+                                        <img src="/images/fog-day.svg" alt="fog-day" height="65">
+                                        <% } else if(daily[3].dailyWeatherCode==51 || daily[3].dailyWeatherCode==53 || daily[3].dailyWeatherCode==61 || daily[3].dailyWeatherCode==63){%>
+                                            <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="65">
+                                            <% } else if(daily[3].dailyWeatherCode==55){ %>
+                                                <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="65">
+                                        <% } else if(daily[3].dailyWeatherCode==65){ %>
+                                            <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="65">
+                                    <% } else if(daily[3].dailyWeatherCode>=71 && daily[3].dailyWeatherCode<78){ %>
+                                        <img src="/images/snowy-2-day.svg" alt="snowy-2-day" height="65">
+                                <% } else if(daily[3].dailyWeatherCode>=65 && daily[3].dailyWeatherCode<=82){ %>
+                                    <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="65">
+                            <% } %>
+                            
+                                
+                        </div>
+                        <p>
+                            <%= daily[3].minTemp %> / <%= daily[3].maxTemp %>
+                        </p>
+                    </div>
+
+                    <div class="content">
+                        <p class="date" data-date="<%= daily[4].date %>">
+                            <%= daily[4].date %>
+                        </p>
+                        <div class="icon">
+                            
+                                <% if(daily[4].dailyWeatherCode==0){ %>
+                                    <img src="/images/clear-day.svg" alt="clear-day" height="65">
+                                    <% } else if(daily[4].dailyWeatherCode==1 || daily[4].dailyWeatherCode == 2){ %>
+                                        <img src="/images/cloudy-1-day.svg" alt="cloudy-1-day" height="65">
+                                <% } else if(daily[4].dailyWeatherCode==3){%>
+                                    <img src="/images/cloudy-2-day.svg" alt="cloudy-2-day" height="65">
+                                    <% } else if(daily[4].dailyWeatherCode==45 || daily[4].dailyWeatherCode==48){%>
+                                        <img src="/images/fog-day.svg" alt="fog-day" height="65">
+                                        <% } else if(daily[4].dailyWeatherCode==51 || daily[4].dailyWeatherCode==53 || daily[4].dailyWeatherCode==61 || daily[4].dailyWeatherCode==63){%>
+                                            <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="65">
+                                            <% } else if(daily[4].dailyWeatherCode==55){ %>
+                                                <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="65">
+                                        <% } else if(daily[4].dailyWeatherCode==65){ %>
+                                            <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="65">
+                                    <% } else if(daily[4].dailyWeatherCode>=71 && daily[4].dailyWeatherCode<78){ %>
+                                        <img src="/images/snowy-2-day.svg" alt="snowy-2-day" height="65">
+                                <% } else if(daily[4].dailyWeatherCode>=65 && daily[4].dailyWeatherCode<=82){ %>
+                                    <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="65">
+                            <% } %>
+                            
+                                
+                        </div>
+                        <p>
+                            <%= daily[4].minTemp %> / <%= daily[4].maxTemp %>
+                        </p>
+                    </div>
+
+                    <div class="content last">
+                        <p class="date" data-date="<%= daily[5].date %>">
+                            <%= daily[5].date %>
+                        </p>
+                        <div class="icon">
+                            
+                                <% if(daily[5].dailyWeatherCode==0){ %>
+                                    <img src="/images/clear-day.svg" alt="clear-day" height="65">
+                                    <% } else if(daily[5].dailyWeatherCode==1 || daily[5].dailyWeatherCode == 2){ %>
+                                        <img src="/images/cloudy-1-day.svg" alt="cloudy-1-day" height="65">
+                                <% } else if(daily[5].dailyWeatherCode==3){%>
+                                    <img src="/images/cloudy-2-day.svg" alt="cloudy-2-day" height="65">
+                                    <% } else if(daily[5].dailyWeatherCode==45 || daily[5].dailyWeatherCode==48){%>
+                                        <img src="/images/fog-day.svg" alt="fog-day" height="65">
+                                        <% } else if(daily[5].dailyWeatherCode==51 || daily[5].dailyWeatherCode==53 || daily[5].dailyWeatherCode==61 || daily[5].dailyWeatherCode==63){%>
+                                            <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="65">
+                                            <% } else if(daily[5].dailyWeatherCode==55){ %>
+                                                <img src="/images/rainy-1-day.svg" alt="rainy-1-day" height="65">
+                                        <% } else if(daily[5].dailyWeatherCode==65){ %>
+                                            <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="65">
+                                    <% } else if(daily[5].dailyWeatherCode>=71 && daily[5].dailyWeatherCode<78){ %>
+                                        <img src="/images/snowy-2-day.svg" alt="snowy-2-day" height="65">
+                                <% } else if(daily[5].dailyWeatherCode>=65 && daily[5].dailyWeatherCode<=82){ %>
+                                    <img src="/images/rainy-3-day.svg" alt="rainy-3-day" height="65">
+                            <% } %>
+                            
+                                
+                        </div>
+                        <p>
+                            <%= daily[5].minTemp %> / <%= daily[5].maxTemp %>
+                        </p>
+                    </div>
+
+
+
+
+            </div>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            const dates = document.querySelectorAll(".date");
+
+            dates.forEach(date => {
+                const dateStr = date.getAttribute("data-date")
+                const newDate = new Date(dateStr);
+                const options = {weekday : 'long'};
+                const dayName = newDate.toLocaleDateString('en-US', options);
+
+                date.innerHTML = `${dayName}`;
+            })
+        })
+    </script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/script.js"></script>
+</body>
+</html>
