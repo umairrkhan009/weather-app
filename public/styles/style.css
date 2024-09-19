@@ -67,6 +67,7 @@ body {
 .search{
   text-align: center;
   margin-bottom: 2rem;
+
 }
 
 input{
@@ -89,10 +90,12 @@ input{
 button{
   position: relative;
   top: 4px;
-  padding: 3px;
+  padding: 4px;
   border: none;
   border-radius: 8px;
   background-color: rgb(183, 207, 215);
+  cursor: pointer;
+  z-index: 10;
 }
 
 button:focus{
@@ -201,6 +204,7 @@ button:focus{
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
+    padding: 10px;
   }
   .six, .nine, .twelve, .fifteen, .eighteen, .twenty-one{
     width: auto;
@@ -226,12 +230,21 @@ button:focus{
     display: block;
   }
 
+  .search-after img{
+    height: 20px;
+  }
+
   .temp-details{
     font-size: 0.8rem;
   }
 
   .temp-details img{
     height: 100px;
+  }
+
+  button{
+    top: 0px;
+    padding: 8px;
   }
   
 }
