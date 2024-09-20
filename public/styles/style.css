@@ -194,6 +194,15 @@ button:focus{
   border-bottom: none;
 }
 
+.content p {
+  flex: 1;
+  text-align: center;
+}
+
+.content .icon{
+  flex: 0;
+}
+
 
 
 @media (min-width: 320px) and (max-width: 970px) {
@@ -222,6 +231,10 @@ button:focus{
     padding-top: 15px;
   }
 
+  .week-forecast .content{
+    font-size: 1.1rem;
+  }
+
   .search{
     display: none;
   }
@@ -245,6 +258,15 @@ button:focus{
   button{
     top: 0px;
     padding: 8px;
+    margin-right: 8px;
   }
   
+  .details{
+    font-size: 12px;
+  }
+
+  .details-icon img{
+    height: 40px;
+  }
+
 }
