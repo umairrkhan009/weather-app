@@ -4,10 +4,9 @@ body {
   margin: 0;
   height: 95vh;
   font-family: "Outfit", sans-serif;
-  font-optical-sizing: auto;
   color: white;
   font-style: normal;
-  background: url("/images/pexel.jpg") no-repeat center center fixed;
+  background: url("/images/pexels.jpg") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -22,12 +21,12 @@ body {
 }
 
 
-#myVideo{
+/* #myVideo{
   position: fixed;
   width: 100%;
   height: 100%;
   right: 0;
-}
+} */
 
 .container {
   min-height: 94.5vh;
@@ -39,8 +38,8 @@ body {
 }
 
 .current {
-  grid-area: 1/1/2/2;
-  border-radius: 15px;
+  /* grid-area: 1/1/2/2; */
+  /* border-radius: 15px;  */
   /* From https://css.glass */
   background: rgba(255, 255, 255, 0.09);
   border-radius: 16px;
@@ -60,14 +59,13 @@ body {
 
 .temp-details .icon{
   position: relative;
-  top: 30px;
-  left: 30px;
+  top: 20px;
 }
 
 .search{
   text-align: center;
-  margin-bottom: 2rem;
-
+  margin-bottom: 1rem;
+  margin-top: 0.5rem;
 }
 
 input{
@@ -95,7 +93,7 @@ button{
   border-radius: 8px;
   background-color: rgb(183, 207, 215);
   cursor: pointer;
-  z-index: 10;
+  /* z-index: 10; */
 }
 
 button:focus{
@@ -111,11 +109,12 @@ button:focus{
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 15px;
+  /* border-radius: 15px; */
   display: flex;
   justify-content: space-around;
   padding: 1.3rem;
   min-height: 180px;
+
 }
 
 
@@ -133,15 +132,14 @@ button:focus{
   /* border-right: 1px solid gray; */
 }
 
-.twenty-one{
+/* .twenty-one{
   border-right: none;
-}
+} */
 
 .details {
   grid-area: 3/1/4/2;
   /* From https://css.glass */
   background: rgba(255, 255, 255, 0.09);
-  border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
@@ -172,9 +170,12 @@ button:focus{
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 15px;
+
 }
 
-.week-forecast{
+
+.content-list{
+  height: 78vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -194,26 +195,31 @@ button:focus{
   border-bottom: none;
 }
 
-.content p {
+.content p{
   flex: 1;
   text-align: center;
 }
 
-.content .icon{
+/* .content .icon{
   flex: 0;
-}
+} */
 
 
 
 @media (min-width: 320px) and (max-width: 970px) {
   .container {
-    grid-template-rows: 0.5fr 0.3fr 0.3fr 0.3fr;
+    grid-template-rows: 0.5fr 0.5fr 0.5fr 0.5fr;
+  }
+
+  .current{
+    font-size: 2rem;
   }
   .forecast{
-    display: flex;
+    /* display: flex; */
+
     flex-wrap: nowrap;
     overflow-x: auto;
-    padding: 10px;
+    font-size: 1.3rem;
   }
   .six, .nine, .twelve, .fifteen, .eighteen, .twenty-one{
     width: auto;
@@ -231,8 +237,13 @@ button:focus{
     padding-top: 15px;
   }
 
+  .content-list{
+    height: 100%;
+  }
+
   .week-forecast .content{
     font-size: 1.1rem;
+    padding-top: 10px;
   }
 
   .search{
@@ -248,7 +259,7 @@ button:focus{
   }
 
   .temp-details{
-    font-size: 0.8rem;
+    font-size: 1.2rem;
   }
 
   .temp-details img{
@@ -262,11 +273,17 @@ button:focus{
   }
   
   .details{
-    font-size: 12px;
+    font-size: 16px;
   }
 
   .details-icon img{
     height: 40px;
   }
 
+}
+
+@media (max-width: 610px){
+  .forecast{
+    justify-content: flex-start;
+  }
 }
